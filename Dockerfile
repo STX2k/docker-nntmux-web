@@ -57,7 +57,7 @@ rm -f /etc/nginx/conf.d/default.conf && \
 echo "**** fix logrotate ****" && \
 sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf && \
 echo "**** cleanup ****" && \
-    apk del --purge \
+    apk del --force --purge \
 	build-dependencies && \
 rm -rf \
     /tmp/*
