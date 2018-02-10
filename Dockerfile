@@ -43,7 +43,7 @@ apk add --no-cache \
     unrar && \
 echo '**** install composer ****' && \
 curl -sS https://getcomposer.org/installer | \
-    php -- --install-dir=/usr/bin/ --filename=composer
+    php -- --install-dir=/usr/bin/ --filename=composer && \
 echo "**** configure nginx ****" && \
 echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
     /etc/nginx/fastcgi_params && \
