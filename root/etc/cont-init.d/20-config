@@ -16,7 +16,7 @@ mkdir -p \
 	cp /defaults/index.html /config/www/index.html
 
 # copy application
-[[ ! -d /app/newznab-tmux/ ]] && \
+[[ ! -d /app/NNTmux/ ]] && \
     git clone https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/
 
 # fix timezone in php.ini
