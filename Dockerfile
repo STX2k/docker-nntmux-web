@@ -1,4 +1,4 @@
-FROM nntmux/alpine
+FROM nntmux:alpine
 
 # set labels
 LABEL maintainer=Nightah
@@ -8,10 +8,13 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 # install packages
 RUN \
+echo "**** install build packages ****" && \
+apk add --no-cache --virtual=build-dependencies \
+    curl && \
 echo "**** add 3.2 alpine repo for pinned tmux version ****" && \
 echo "http://dl-cdn.alpinelinux.org/alpine/v3.2/main" >> /etc/apk/repositories && \
 echo "**** trust and add php repo ****" && \
-wget -O /etc/apk/keys/php-alpine.rsa.pub https://php.codecasts.rocks/php-alpine.rsa.pub && \
+curl -o /etc/apk/keys/php-alpine.rsa.pub https://php.codecasts.rocks/php-alpine.rsa.pub && \
 echo "@php https://php.codecasts.rocks/v3.7/php-7.2" >> /etc/apk/repositories && \
 apk add --no-cache \
     apache2-utils \
@@ -42,7 +45,7 @@ apk add --no-cache \
     tmux==2.0-r0 \
     unrar && \
 echo '**** install composer ****' && \
-wget -O - https://getcomposer.org/installer | \
+curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer && \
 echo "**** configure nginx ****" && \
 echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
@@ -50,6 +53,11 @@ echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
 rm -f /etc/nginx/conf.d/default.conf && \
 echo "**** fix logrotate ****" && \
 sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf
+echo "**** cleanup ****" && \
+    apk del --purge \
+	build-dependencies && \
+rm -rf \
+    /tmp/*
 
 # copy local files
 COPY root/ /
