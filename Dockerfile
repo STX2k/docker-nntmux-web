@@ -32,6 +32,7 @@ apk add --no-cache \
     php7-ctype@php \
     php7-curl@php \
     php7-dev@php \
+    php7-dom@php \
     php7-exif@php \
     php7-fpm@php \
     php7-gd@php \
