@@ -29,18 +29,23 @@ apk add --no-cache \
     p7zip \
     php7@php \
     php7-common@php \
+    php7-ctype@php \
     php7-curl@php \
     php7-dev@php \
+    php7-exif@php \
     php7-fpm@php \
     php7-gd@php \
+    php7-iconv@php \
     php7-imagick@php \
     php7-json@php \
     php7-mbstring@php \
-    php7-mysqlnd@php \
     php7-openssl@php \
+    php7-pdo@php \
+    php7-pdo_mysql@php \
     php7-pear@php \
     php7-phar@php \
     php7-session@php \
+    php7-sockets@php \
     php7-xml@php \
     php7-zlib@php \
     tmux==2.0-r0 \
