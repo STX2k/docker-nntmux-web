@@ -1,0 +1,54 @@
+server {
+	listen 80 default_server;
+
+	listen 443 ssl;
+
+	root /app/NNTmux/;
+	index index.html index.htm index.php;
+
+	server_name _;
+
+	ssl_certificate /config/keys/cert.crt;
+	ssl_certificate_key /config/keys/cert.key;
+
+	client_max_body_size 0;
+
+	# Everything below this should not be changed unless noted.
+    location ~* \.(?:css|eot|gif|gz|ico|inc|jpe?g|js|ogg|oga|ogv|mp4|m4a|mp3|png|svg|ttf|txt|woff|xml)$ {
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    location / {
+        try_files $uri $uri/ @rewrites;
+    }
+
+    location ^~ /covers/ {
+        # This is where the NNTmux covers folder should be in.
+        root /app/NNTmux/resources;
+    }
+
+    location @rewrites {
+        rewrite ^/([^/\.]+)/([^/]+)/([^/]+)/? /index.php?page=$1&id=$2&subpage=$3 last;
+        rewrite ^/([^/\.]+)/([^/]+)/?$ /index.php?page=$1&id=$2 last;
+        rewrite ^/([^/\.]+)/?$ /index.php?page=$1 last;
+    }
+
+    location /admin {
+    }
+
+    location /install {
+    }
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		# With php5-cgi alone:
+		fastcgi_pass 127.0.0.1:9000;
+		# With php5-fpm:
+		#fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include /etc/nginx/fastcgi_params;
+
+	}
+}
