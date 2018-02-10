@@ -1,4 +1,4 @@
-FROM nntmux:alpine
+FROM nntmux/alpine
 
 # set labels
 LABEL maintainer=Nightah
