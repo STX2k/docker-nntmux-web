@@ -39,11 +39,14 @@ apk add --no-cache \
     php7-mysqlnd@php \
     php7-openssl@php \
     php7-pear@php \
+    php7-phar@php \
     php7-session@php \
     php7-xml@php \
     php7-zlib@php \
     tmux==2.0-r0 \
     unrar && \
+echo '**** create php symlink ****' && \
+ln -s /usr/bin/php7 /usr/bin/php && \
 echo '**** install composer ****' && \
 curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer && \
