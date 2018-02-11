@@ -15,21 +15,38 @@ mkdir -p \
 [[ $(find /config/www -type f | wc -l) -eq 0 ]] && \
 	cp /defaults/index.html /config/www/index.html
 
-# copy application
+# first time application handling
 [[ ! -d /app/NNTmux/ ]] && \
-    git clone https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/
+    echo "cloning application into /app/NNTmux/" && \
+    git clone https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
+[[ ! -d /app/NNTmux/vendor/ ]] && \
+    echo "installing composer packages" && \
+    cd /app/NNTmux/ && composer install
 
+# existing application handling
+[[ -d /app/NNTmux/ ]] && \
+    cd /app/NNTmux/ && php artisan nntmux:all
+
+# fix max_execution_time in php.ini
+sed -i "s#max_execution_time = 30.*#max_execution_time = 120#g" /etc/php7/php.ini
+# fix memory_limit in php.ini
+sed -i "s#memory_limit = 128M.*#memory_limit = $PHPMEM#g" /etc/php7/php.ini
 # fix timezone in php.ini
 sed -i "s#;date.timezone =.*#date.timezone = $TZ#g" /etc/php7/php.ini
-#fix php-fpm log location
+# enable error logging in php.ini
+sed -i "s#error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT.*#error_reporting = E_ALL#g" /etc/php7/php.ini
+# fix php log location
+sed -i "s#;error_log = php_errors.log.*#;error_log = /config/log/php/clierror.log#g" /etc/php7/php.ini
+# fix php-fpm log location
 sed -i "s#;error_log = log/php7/error.log.*#error_log = /config/log/php/error.log#g" /etc/php7/php-fpm.conf
-#fix php-fpm user
+# fix php-fpm user
 sed -i "s#user = nobody.*#user = abc#g" /etc/php7/php-fpm.d/www.conf
 sed -i "s#group = nobody.*#group = abc#g" /etc/php7/php-fpm.d/www.conf
 
 
 # permissions
 chown -R abc:abc \
+	/app \
 	/config \
 	/run \
 	/var/lib/nginx \
