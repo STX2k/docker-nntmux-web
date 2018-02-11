@@ -36,7 +36,7 @@ sed -i "s#;date.timezone =.*#date.timezone = $TZ#g" /etc/php7/php.ini
 # enable error logging in php.ini
 sed -i "s#error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT.*#error_reporting = E_ALL#g" /etc/php7/php.ini
 # fix php log location
-sed -i "s#;error_log = php_errors.log.*#;error_log = /config/log/php/clierror.log#g" /etc/php7/php.ini
+sed -i "s#;error_log = php_errors.log.*#error_log = /config/log/php/clierror.log#g" /etc/php7/php.ini
 # fix php-fpm log location
 sed -i "s#;error_log = log/php7/error.log.*#error_log = /config/log/php/error.log#g" /etc/php7/php-fpm.conf
 # fix php-fpm user
