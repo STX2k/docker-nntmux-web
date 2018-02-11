@@ -28,6 +28,7 @@ apk add --no-cache \
     openssl \
     p7zip \
     php7@php \
+    php7-bcmath@php \
     php7-common@php \
     php7-ctype@php \
     php7-curl@php \
