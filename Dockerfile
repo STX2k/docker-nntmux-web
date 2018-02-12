@@ -40,6 +40,7 @@ apk add --no-cache \
     php7-iconv@php \
     php7-imagick@php \
     php7-json@php \
+    php7-libsodium@php \
     php7-mbstring@php \
     php7-openssl@php \
     php7-pdo@php \
