@@ -40,7 +40,6 @@ apk add --no-cache \
     php7-iconv@php \
     php7-imagick@php \
     php7-json@php \
-    php7-libsodium@php \
     php7-mbstring@php \
     php7-openssl@php \
     php7-pdo@php \
@@ -49,6 +48,7 @@ apk add --no-cache \
     php7-phar@php \
     php7-session@php \
     php7-sockets@php \
+    php7-sodium@php \
     php7-xml@php \
     php7-zlib@php \
     tmux==2.0-r0 \
