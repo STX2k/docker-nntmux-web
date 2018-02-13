@@ -51,6 +51,7 @@ apk add --no-cache \
     php7.2-simplexml@php \
     php7.2-sockets@php \
     php7.2-sodium@php \
+    php7.2-tokenizer@php \
     php7.2-xml@php \
     php7.2-xmlwriter@php \
     php7.2-zlib@php \
