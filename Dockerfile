@@ -53,8 +53,6 @@ apk add --no-cache \
     php7.2-zlib@php \
     tmux==2.0-r0 \
     unrar && \
-echo '**** create php symlink ****' && \
-ln -s /usr/bin/php7 /usr/bin/php && \
 echo '**** install composer ****' && \
 curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer && \
