@@ -35,6 +35,7 @@ apk add --no-cache \
     php7.2-dev@php \
     php7.2-dom@php \
     php7.2-exif@php \
+    php7.2-fileinfo@php \
     php7.2-fpm@php \
     php7.2-gd@php \
     php7.2-iconv@php \
@@ -47,9 +48,11 @@ apk add --no-cache \
     php7.2-pear@php \
     php7.2-phar@php \
     php7.2-session@php \
+    php7.2-simplexml@php \
     php7.2-sockets@php \
     php7.2-sodium@php \
     php7.2-xml@php \
+    php7.2-xmlwriter@php \
     php7.2-zlib@php \
     tmux==2.0-r0 \
     unrar && \
