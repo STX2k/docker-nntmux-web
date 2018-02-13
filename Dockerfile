@@ -14,8 +14,8 @@ apk add --no-cache --virtual=build-dependencies \
 echo "**** add 3.2 alpine repo for pinned tmux version ****" && \
 echo "http://dl-cdn.alpinelinux.org/alpine/v3.2/main" >> /etc/apk/repositories && \
 echo "**** trust and add php repo ****" && \
-curl -o /etc/apk/keys/php-alpine.rsa.pub https://php.codecasts.rocks/php-alpine.rsa.pub && \
-echo "@php https://php.codecasts.rocks/v3.7/php-7.2" >> /etc/apk/repositories && \
+curl -o /etc/apk/keys/phpearth.rsa.pub https://repos.php.earth/alpine/phpearth.rsa.pub && \
+echo "@php https://repos.php.earth/alpine/v3.7" >> /etc/apk/repositories && \
 apk add --no-cache \
     apache2-utils \
     ffmpeg \
@@ -27,30 +27,30 @@ apk add --no-cache \
     nginx \
     openssl \
     p7zip \
-    php7@php \
-    php7-bcmath@php \
-    php7-common@php \
-    php7-ctype@php \
-    php7-curl@php \
-    php7-dev@php \
-    php7-dom@php \
-    php7-exif@php \
-    php7-fpm@php \
-    php7-gd@php \
-    php7-iconv@php \
-    php7-imagick@php \
-    php7-json@php \
-    php7-mbstring@php \
-    php7-openssl@php \
-    php7-pdo@php \
-    php7-pdo_mysql@php \
-    php7-pear@php \
-    php7-phar@php \
-    php7-session@php \
-    php7-sockets@php \
-    php7-sodium@php \
-    php7-xml@php \
-    php7-zlib@php \
+    php7.2@php \
+    php7.2-bcmath@php \
+    php7.2-common@php \
+    php7.2-ctype@php \
+    php7.2-curl@php \
+    php7.2-dev@php \
+    php7.2-dom@php \
+    php7.2-exif@php \
+    php7.2-fpm@php \
+    php7.2-gd@php \
+    php7.2-iconv@php \
+    php7.2-imagick@php \
+    php7.2-json@php \
+    php7.2-mbstring@php \
+    php7.2-openssl@php \
+    php7.2-pdo@php \
+    php7.2-pdo_mysql@php \
+    php7.2-pear@php \
+    php7.2-phar@php \
+    php7.2-session@php \
+    php7.2-sockets@php \
+    php7.2-sodium@php \
+    php7.2-xml@php \
+    php7.2-zlib@php \
     tmux==2.0-r0 \
     unrar && \
 echo '**** create php symlink ****' && \
