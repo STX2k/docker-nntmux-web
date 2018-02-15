@@ -16,11 +16,11 @@ mkdir -p \
 	cp /defaults/index.html /config/www/index.html
 
 # first time application handling
-[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == stable ]] && \ \
-    echo "cloning application into /app/NNTmux/" && \
+[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == "stable" ]] && \ \
+    echo "cloning stable application into /app/NNTmux/" && \
     git clone --depth 1 --branch 0.x https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
-[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == dev ]] && \ \
-    echo "cloning application into /app/NNTmux/" && \
+[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == "dev" ]] && \ \
+    echo "cloning dev application into /app/NNTmux/" && \
     git clone --depth 1 --branch dev https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
 [[ ! -d /app/NNTmux/vendor/ ]] && \
     echo "installing composer packages" && \
