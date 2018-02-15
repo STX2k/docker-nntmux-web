@@ -24,7 +24,7 @@ mkdir -p \
     cd /app/NNTmux/ && composer install
 
 # existing application handling
-[[ -d /app/NNTmux/ ]] && \
+[[ $AUTOUPDATE = true ]] && \
     cd /app/NNTmux/ && php artisan nntmux:all
 
 # fix max_execution_time in php.ini
@@ -38,10 +38,10 @@ sed -i "s#error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT.*#error_reporting 
 # fix php log location
 sed -i "s#;error_log = php_errors.log.*#error_log = /config/log/php/clierror.log#g" /etc/php/7.2/php.ini
 # fix php-fpm log location
-sed -i "s#;error_log = log/php7/error.log.*#error_log = /config/log/php/error.log#g" /etc/php/7.2/php-fpm.conf
+sed -i "s#error_log = /var/log/php/7.2/php-fpm.log.*#error_log = /config/log/php/error.log#g" /etc/php/7.2/php-fpm.conf
 # fix php-fpm user
-sed -i "s#user = nobody.*#user = abc#g" /etc/php/7.2/php-fpm.d/www.conf
-sed -i "s#group = nobody.*#group = abc#g" /etc/php/7.2/php-fpm.d/www.conf
+sed -i "s#user = www-data.*#user = abc#g" /etc/php/7.2/php-fpm.d/www.conf
+sed -i "s#group = www-data.*#group = abc#g" /etc/php/7.2/php-fpm.d/www.conf
 
 
 # permissions
