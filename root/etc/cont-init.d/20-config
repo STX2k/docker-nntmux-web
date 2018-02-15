@@ -16,15 +16,20 @@ mkdir -p \
 	cp /defaults/index.html /config/www/index.html
 
 # first time application handling
-[[ ! -d /app/NNTmux/ ]] && \
+[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == stable ]] && \ \
     echo "cloning application into /app/NNTmux/" && \
-    git clone https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
+    git clone --depth 1 --branch 0.x https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
+[[ ! -d /app/NNTmux/ ]] && [[ $BRANCH == dev ]] && \ \
+    echo "cloning application into /app/NNTmux/" && \
+    git clone --depth 1 --branch dev https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
 [[ ! -d /app/NNTmux/vendor/ ]] && \
     echo "installing composer packages" && \
+    composer global require hirak/prestissimo && \
     cd /app/NNTmux/ && composer install
 
 # existing application handling
-[[ -d /app/NNTmux/ ]] && \
+echo "Auto update set to: $AUTOUPDATE" && \
+[[ $AUTOUPDATE == true ]] && \
     cd /app/NNTmux/ && php artisan nntmux:all
 
 # fix max_execution_time in php.ini
@@ -39,6 +44,8 @@ sed -i "s#error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT.*#error_reporting 
 sed -i "s#;error_log = php_errors.log.*#error_log = /config/log/php/clierror.log#g" /etc/php/7.2/php.ini
 # fix php-fpm log location
 sed -i "s#error_log = /var/log/php/7.2/php-fpm.log.*#error_log = /config/log/php/error.log#g" /etc/php/7.2/php-fpm.conf
+# fix php-fpm listener
+sed -i "s#listen = /run/php/php-fpm7.2.sock.*#listen = 127.0.0.1:9000#g" /etc/php/7.2/php-fpm.d/www.conf
 # fix php-fpm user
 sed -i "s#user = www-data.*#user = abc#g" /etc/php/7.2/php-fpm.d/www.conf
 sed -i "s#group = www-data.*#group = abc#g" /etc/php/7.2/php-fpm.d/www.conf
