@@ -31,7 +31,7 @@ fi
 [[ ! -d /app/NNTmux/vendor/ ]] && \
     echo "installing composer packages" && \
     composer global require hirak/prestissimo && \
-    cd /app/NNTmux/ && composer install
+    cd /app/NNTmux/ && composer install --prefer-dist
 
 # existing application handling
 if [ "$AUTOUPDATE" = "true" ]
