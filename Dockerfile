@@ -56,9 +56,10 @@ apk add --no-cache \
     php7.2-zlib@php \
     tmux==2.0-r0 \
     unrar && \
-echo '**** install composer ****' && \
+echo '**** install composer and prestissimo package ****' && \
 curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer && \
+composer global require hirak/prestissimo && \
 echo "**** configure nginx ****" && \
 echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
     /etc/nginx/fastcgi_params && \
