@@ -34,9 +34,13 @@ fi
     cd /app/NNTmux/ && composer install
 
 # existing application handling
-echo "Auto update set to: $AUTOUPDATE" && \
-[ "$AUTOUPDATE" = "true" ] && \
+if [ "$AUTOUPDATE" = "true" ]
+then
+    echo "Updating NNTmux application"
     cd /app/NNTmux/ && php artisan nntmux:all
+else
+    echo "Auto update set to: $AUTOUPDATE"
+fi
 
 # fix max_execution_time in php.ini
 sed -i "s#max_execution_time = 30.*#max_execution_time = 120#g" /etc/php/7.2/php.ini
