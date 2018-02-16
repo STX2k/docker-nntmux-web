@@ -16,12 +16,18 @@ mkdir -p \
 	cp /defaults/index.html /config/www/index.html
 
 # first time application handling
-[[ ! -d /app/NNTmux/ ]] && [ "$BRANCH" = "stable" ] && \
-    echo "cloning stable branch into /app/NNTmux/" && \
-    git clone --depth 1 --branch 0.x https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
-[[ ! -d /app/NNTmux/ ]] && [ "$BRANCH" = "dev" ] && \
-    echo "cloning dev branch into /app/NNTmux/" && \
-    git clone --depth 1 --branch dev https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/ && \
+[[ ! -d /app/NNTmux/ ]] && \
+if [ "$BRANCH" = "stable" ]
+then
+    echo "Cloning stable branch into /app/NNTmux/"
+    git clone --depth 1 --branch 0.x https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/
+elif [ "$BRANCH" = "dev" ]
+then
+    echo "Cloning dev branch into /app/NNTmux/"
+    git clone --depth 1 --branch dev https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/
+else
+    echo "Branch: $BRANCH is not correct, please set to either 0.x for stable or dev for development"
+fi
 [[ ! -d /app/NNTmux/vendor/ ]] && \
     echo "installing composer packages" && \
     composer global require hirak/prestissimo && \
