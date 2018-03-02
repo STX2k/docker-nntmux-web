@@ -38,6 +38,7 @@ apk add --no-cache \
     php7.2-fpm@php \
     php7.2-gd@php \
     php7.2-iconv@php \
+    php7.2-intl@php \
     php7.2-imagick@php \
     php7.2-json@php \
     php7.2-mbstring@php \
