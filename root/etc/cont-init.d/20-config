@@ -26,7 +26,7 @@ then
     echo "Cloning dev branch into /app/NNTmux/"
     git clone --depth 1 --branch dev https://github.com/NNTmux/newznab-tmux.git /app/NNTmux/
 else
-    echo "Branch: $BRANCH is not correct, please set to either 0.x for stable or dev for development"
+    echo "Branch: $BRANCH is not correct, please set to either stable for 0.x or dev for development"
 fi
 [[ ! -d /app/NNTmux/vendor/ ]] && \
     echo "installing composer packages" && \
