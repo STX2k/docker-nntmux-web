@@ -43,6 +43,7 @@ apk add --no-cache \
     php7.2-json@php \
     php7.2-mbstring@php \
     php7.2-openssl@php \
+    php7.2-pcntl@php \
     php7.2-pdo@php \
     php7.2-pdo_mysql@php \
     php7.2-pear@php \
