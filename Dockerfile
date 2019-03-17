@@ -56,6 +56,7 @@ apk add --no-cache \
     php7.2-xml@php \
     php7.2-xmlwriter@php \
     php7.2-zlib@php \
+    php7.2-posix@php \
     tmux==2.0-r0 \
     unrar && \
 echo '**** install composer and prestissimo package ****' && \
